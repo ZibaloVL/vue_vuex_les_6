@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {/*data object* x:y*/
 
-    test: "Test",
+    controls: [],
     info: [
       {
         name: 'Name',
@@ -38,17 +38,33 @@ export const store = new Vuex.Store({
 
   },
 
+
+
   getters:{/*getters data object  x(state){return state.y}*/
 
     
     test(state){return state.test},
-    info(state){ return state.info}
+    info(state){ return state.info},
+    controls(state) {return state.controls},
+    labelType(state){}
 
   },
 
   mutations:{ /*action sinhr xAction(state, {z:s}){  state.xAction =... }*/ 
+    
     inputInfo(state, data){
-      state.info[data.index].value = data.value;
+      state.info[data.index].value = data.value;   
+    },
+    makeControls(state){ //проверочный массив
+      for(let i = 0; i < state.info.length; i++){
+        if(state.info[i].value === '')
+          {state.controls.push('');}
+          else if(state.info[i].pattern.test(state.info[i].value)) 
+                 {state.controls.push('fa-check-circle text-success');}
+                else {state.controls.push('fa-exclamation-circle  text-danger');}       
+
+      }
+      console.log('state.controls  '+ state.controls);
     }
   },
 

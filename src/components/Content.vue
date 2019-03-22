@@ -3,6 +3,7 @@
         <div class="form-group"
             v-for="(inf, index) in info" :key="index">
           <label for="">{{inf.name}}</label>
+          <span class="fa" :class="controls[index]"></span>
           <input type="text"
             class="form-control" 
             @input="onInput($event, index)"
@@ -19,6 +20,7 @@ export default {
   computed: {
        ...mapGetters([
            'info',
+           'controls'
        ])
 
        /* вариант если присвоить V-model  вместо input
@@ -41,5 +43,15 @@ export default {
             this.$store.commit('inputInfo', data);
         }
     },
+     beforeMount(){
+        this.$store.commit('makeControls');
+
+      /*  this.controls.push({
+          error: !this.info[i].pattern.test(this.info[i].value),
+          activated: this.info[i].value != ''
+        });
+      */
+    
+  },
 }
 </script>
