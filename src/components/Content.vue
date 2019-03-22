@@ -4,7 +4,9 @@
             v-for="(inf, index) in info" :key="index">
           <label for="">{{inf.name}}</label>
           <input type="text"
-            class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+            class="form-control" 
+            @input="onInput($event, index)"
+            >
           <small id="helpId" class="form-text text-muted">Help text</small>
         </div>
     </div>
@@ -30,6 +32,14 @@ export default {
         }
         */
         
+    },
+    methods: {
+        onInput(e, index){
+            let data = {};
+            data.index = index;
+            data.value = e.target.value;
+            this.$store.commit('inputInfo', data);
+        }
     },
 }
 </script>

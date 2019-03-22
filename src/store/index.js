@@ -47,7 +47,9 @@ export const store = new Vuex.Store({
   },
 
   mutations:{ /*action sinhr xAction(state, {z:s}){  state.xAction =... }*/ 
-
+    inputInfo(state, data){
+      state.info[data.index].value = data.value;
+    }
   },
 
   action:{/*axction asynhr sendX(store, data){store.commit('name_mutation')}*/
