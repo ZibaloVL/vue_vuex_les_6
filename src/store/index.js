@@ -54,6 +54,13 @@ export const store = new Vuex.Store({
     
     inputInfo(state, data){
       state.info[data.index].value = data.value;   
+      //нет реактивности попробовать через $set
+      if(state.info[data.index].value === '')
+          {state.controls[data.index] = '';}
+          else if(state.info[data.index].pattern.test(state.info[data.index].value)) 
+                 {state.controls[data.index] = 'fa-check-circle text-success';}
+                else {state.controls[data.index] = 'fa-exclamation-circle  text-danger';}
+      console.log('state.controls[data.index] ' + state.controls[data.index]);                 
     },
     makeControls(state){ //проверочный массив
       for(let i = 0; i < state.info.length; i++){
@@ -65,7 +72,8 @@ export const store = new Vuex.Store({
 
       }
       console.log('state.controls  '+ state.controls);
-    }
+    },
+    realControls(state){}
   },
 
   action:{/*axction asynhr sendX(store, data){store.commit('name_mutation')}*/
