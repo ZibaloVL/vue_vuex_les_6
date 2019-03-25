@@ -67,9 +67,17 @@ export const store = new Vuex.Store({
       console.log('state.controls[0]  '+ state.controls[0]);
     },
 
-    makeControls(state,index){Vue.set(state.controls, index, " " );},
-    makeControlsOk(state,index){Vue.set(state.controls, index, 'fa-check-circle text-success' );},
-    makeControlsDanger(state,index){Vue.set(state.controls, index, 'fa-exclamation-circle  text-danger' );}
+    makeValue(state, data){state.info[data.index].value = data.value;},
+
+    makeControls(state,index){Vue.set(state.controls, index, " " );
+                  console.log("state.controls[index]  ",state.controls[index]);
+    },
+    makeControlsOk(state,index){Vue.set(state.controls, index, 'fa-check-circle text-success' );
+                  console.log("state.controls[index]  ",state.controls[index]);
+    },
+    makeControlsDanger(state,index){Vue.set(state.controls, index, 'fa-exclamation-circle  text-danger' );
+                  console.log("state.controls[index]  ",state.controls[index]);
+    }
       
    
     
