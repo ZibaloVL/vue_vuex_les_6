@@ -35,20 +35,19 @@ export default {
         }
         */
         
-    },//ПРОВЕРИТЬ РАБОТУ ВЕТВДЕНИЯ И ПРИСВАИВАНИЯ!!!
+    },
     methods: {
         onInput(e, index){
-         let   value = e.target.value;
-         let   pattern = this.info[index].pattern;
-         let  data = {};
-         data.value = value;
-         data.index = index;
-        this.$store.commit('makeValue', data);
-        console.log("pattern"+pattern);
-        console.log("value  "+value );
-            if (value === "") {this.$store.commit('makeControls', index);}
-                else if(pattern.test(value)){ this.$store.commit('makeControlsOk', index)}
-                    else{this.$store.commit('makeControlsDanger', index);}
+         
+            let   pattern = this.info[index].pattern;
+            let  data = {};
+            data.value = e.target.value;;
+            data.index = index;
+            this.$store.commit('makeValue', data);
+       
+            if (data.value === "") {this.$store.commit('makeControls', data.index);}
+                else if(pattern.test(data.value)){ this.$store.commit('makeControlsOk', data.index)}
+                    else{this.$store.commit('makeControlsDanger', data.index);}
         }
 
     },

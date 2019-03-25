@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {/*data object* x:y*/
 
-    controls: {},
+    controls: [],
     info: [
       {
         name: 'Name',
@@ -53,22 +53,26 @@ export const store = new Vuex.Store({
   mutations:{ /*action sinhr xAction(state, {z:s}){  state.xAction =... }*/ 
     
     makeCont(state){ //проверочный массив
-      let pr = [];
+    
       for(let i = 0; i < state.info.length; i++){
         if(state.info[i].value === '')
-          {pr[i] = ''}
+          {state.controls.push('')}
           else if(state.info[i].pattern.test(state.info[i].value)) 
-                 {pr[i] = 'fa-check-circle text-success';}
-                else {pr[i] = 'fa-exclamation-circle  text-danger';}       
-
+                 {state.controls.push('fa-check-circle text-success');}
+                else {state.controls.push('fa-exclamation-circle  text-danger');}       
       }
-      Object.assign(state.controls, pr);
-      console.log('state.controls  '+ state.controls);
-      console.log('state.controls[0]  '+ state.controls[0]);
+
     },
 
     makeValue(state, data){state.info[data.index].value = data.value;},
 
+    makeControls(state, index){state.controls[index] = "";},
+    makeControlsOk(state, index){state.controls[index] = 'fa-check-circle text-success'; },
+    makeControlsDanger(state, index){state.controls[index] = 'fa-check-circle text-danger'; }
+
+
+
+    /*
     makeControls(state,index){Vue.set(state.controls, index, " " );
                   console.log("state.controls[index]  ",state.controls[index]);
     },
@@ -79,7 +83,7 @@ export const store = new Vuex.Store({
                   console.log("state.controls[index]  ",state.controls[index]);
     }
       
-   
+   */
     
 
 
