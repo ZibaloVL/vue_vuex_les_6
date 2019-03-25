@@ -6,6 +6,7 @@
           <span class="fa" :class="controls[index]"></span>
           <input type="text"
             class="form-control" 
+            :value = inf.value
             @input="onInput($event, index)"
             >
           <small id="helpId" class="form-text text-muted">Help text</small>
@@ -34,27 +35,20 @@ export default {
         }
         */
         
-    },
+    },//ПРОВЕРИТЬ РАБОТУ ВЕТВДЕНИЯ И ПРИСВАИВАНИЯ!!!
     methods: {
         onInput(e, index){
-            let data = {};
-            data.index = index;
-            data.value = e.target.value;
-            this.$store.commit('inputInfo', data);
-            
-
-
+         let   value = e.target.value;
+         let   pattern = this.info[index].pattern;
+            if (value === "") {this.$store.commit('makeControls', index);}
+                else if(pattern.test(value)){ this.$store.commit('makeControlsOk', index)}
+                    else{this.$store.commit('makeControlsDanger', index);}
         }
     },
-     beforeMount(){
-        this.$store.commit('makeControls');
 
-      /*  this.controls.push({
-          error: !this.info[i].pattern.test(this.info[i].value),
-          activated: this.info[i].value != ''
-        });
-      */
-    
-  },
+     beforeMount(){
+        this.$store.commit('makeCont');
+  }
+
 }
 </script>
