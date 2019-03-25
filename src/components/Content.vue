@@ -41,6 +41,9 @@ export default {
             data.index = index;
             data.value = e.target.value;
             this.$store.commit('inputInfo', data);
+            
+
+
         }
     },
      beforeMount(){
